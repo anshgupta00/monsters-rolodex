@@ -1,6 +1,8 @@
 import { Component } from "react";
 
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
+import CardList from "./components/card-list/card-list.component";
+
 import "./App.css";
 
 // class Component
@@ -71,6 +73,10 @@ class App extends Component {
     this.setState({ searchField: event.target.value });
   };
   render() {
+    const filteredMonsters = this.state.monsters.filter(monster => {
+      return monster.name.toLocaleLowerCase().includes(this.state.searchField);
+    });
+
     return (
       <div className="App">
         <input
@@ -80,12 +86,10 @@ class App extends Component {
           onChange={event => {
             console.log(event.target.value);
 
-            const searchString = event.target.value.toLocaleLowerCase();
-            const filteredMonsters = this.state.monsters.filter(monster => {
-              return monster.name.toLocaleLowerCase().includes(searchString);
-            });
+            const searchField = event.target.value.toLocaleLowerCase();
+
             this.setState(() => {
-              return { monsters: filteredMonsters };
+              return { searchField };
             });
           }}
         />
@@ -93,6 +97,7 @@ class App extends Component {
         {this.state.monsters.map(monster => {
           return <h1>{monster.name}</h1>;
         })}
+        <CardList />
       </div>
     );
   }
