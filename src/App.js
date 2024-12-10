@@ -93,11 +93,11 @@ class App extends Component {
             });
           }}
         />
-
         {this.state.monsters.map(monster => {
           return <h1>{monster.name}</h1>;
         })}
-        <CardList />
+        <CardList monsters={"I'm a monster."} />
+        npm
       </div>
     );
   }
